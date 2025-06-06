@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Realyn V. Babagay - Portfolio</title>
+  <style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2c3e50;
+      --accent-color: #e74c3c;
+      --light-color: #ecf0f1;
+      --dark-color: #2c3e50;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      line-height: 1.6;
+      color: #333;
+      background-color: var(--light-color);
+    }
+    
+    header {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    .logo span {
+      color: var(--primary-color);
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-links li {
+      margin-left: 2rem;
+    }
+    
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+    
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      padding: 5px;
+    }
+    
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    section {
+      padding: 6rem 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+    
+    #home {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+    }
+    
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    .hero-content p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .btn:hover {
+      background-color: #2980b9;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2.5rem;
+      color: var(--secondary-color);
+    }
+    
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    
+    .about-img {
+      flex: 1;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .about-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .about-text {
+      flex: 1;
+    }
+    
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+    
+    .skill-card {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .skill-card i {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+    
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .project-card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .project-img {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .project-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    
+    .project-card:hover .project-img img {
+      transform: scale(1.1);
+    }
+    
+    .project-info {
+      padding: 1.5rem;
+    }
+    
+    .certificates-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .certificate-card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .certificate-img {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .certificate-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    
+    .form-group textarea {
+      height: 150px;
+    }
+    
+    footer {
+      background-color: var(--secondary-color);
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+    }
+    
+    /* Mobile Navigation */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+      
+      .nav-links {
+        position: absolute;
+        right: 0;
+        top: 70px;
+        background-color: var(--secondary-color);
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        clip-path: circle(0px at 90% -10%);
+        -webkit-clip-path: circle(0px at 90% -10%);
+        transition: all 0.5s ease-out;
+      }
+      
+      .nav-links li {
+        margin: 1rem 0;
+      }
+      
+      .nav-links.active {
+        clip-path: circle(1000px at 90% -10%);
+        -webkit-clip-path: circle(1000px at 90% -10%);
+      }
+      
+      .about-content {
+        flex-direction: column;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+    }
+    
+    /* Animation for hamburger menu */
+    .toggle .line1 {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .toggle .line2 {
+      opacity: 0;
+    }
+    
+    .toggle .line3 {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">Realyn <span>Babagay</span></div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#certificates">Certificates</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Hi, I'm Realyn V. Babagay</h1>
+        <p>A passionate professional dedicated to creating meaningful digital experiences. Welcome to my portfolio.</p>
+        <a href="#about" class="btn">Learn More About Me</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Realyn Babagay">
+        </div>
+        <div class="about-text">
+          <h3>Who I Am</h3>
+          <p>I'm Realyn V. Babagay, a dedicated professional with expertise in various technical and creative fields. With a strong passion for continuous learning and problem-solving, I strive to deliver exceptional results in every project I undertake.</p>
+          <p>My journey has been marked by a commitment to excellence and a drive to push boundaries. I believe in the power of technology and creativity to transform ideas into impactful solutions.</p>
+          <p>When I'm not working, you can find me exploring new technologies, contributing to open-source projects, or mentoring aspiring professionals in my field.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title">My Skills</h2>
+      <div class="skills-container">
+        <div class="skill-card">
+          <i class="fas fa-code"></i>
+          <h3>Web Development</h3>
+          <p>HTML, CSS, JavaScript, React, Node.js, and more</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-paint-brush"></i>
+          <h3>UI/UX Design</h3>
+          <p>Creating intuitive and beautiful user interfaces</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-mobile-alt"></i>
+          <h3>Mobile Development</h3>
+          <p>Building cross-platform mobile applications</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-database"></i>
+          <h3>Database Management</h3>
+          <p>SQL, NoSQL, and data modeling expertise</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-project-diagram"></i>
+          <h3>Project Management</h3>
+          <p>Agile methodologies and team leadership</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-chart-line"></i>
+          <h3>Data Analysis</h3>
+          <p>Extracting insights from complex datasets</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">My Projects</h2>
+      <div class="projects-container">
+        <div class="project-card">
+          <div class="project-img">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="E-commerce Platform">
+          </div>
+          <div class="project-info">
+            <h3>E-commerce Platform</h3>
+            <p>A full-featured online store with payment integration and inventory management.</p>
+            <a href="#" class="btn">View Project</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-img">
+            <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Health Tracking App">
+          </div>
+          <div class="project-info">
+            <h3>Health Tracking App</h3>
+            <p>Mobile application for monitoring fitness goals and health metrics.</p>
+            <a href="#" class="btn">View Project</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-img">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Data Visualization Dashboard">
+          </div>
+          <div class="project-info">
+            <h3>Data Visualization Dashboard</h3>
+            <p>Interactive dashboard for analyzing and presenting complex datasets.</p>
+            <a href="#" class="btn">View Project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certificates">
+    <div class="container">
+      <h2 class="section-title">My Certificates</h2>
+      <div class="certificates-container">
+        <div class="certificate-card">
+          <div class="certificate-img">
+            <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Web Development Certificate">
+          </div>
+          <div class="project-info">
+            <h3>Advanced Web Development</h3>
+            <p>Certified in modern web technologies and frameworks.</p>
+          </div>
+        </div>
+        <div class="certificate-card">
+          <div class="certificate-img">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="UI/UX Design Certificate">
+          </div>
+          <div class="project-info">
+            <h3>UI/UX Design Specialist</h3>
+            <p>Certification in user interface and experience design principles.</p>
+          </div>
+        </div>
+        <div class="certificate-card">
+          <div class="certificate-img">
+            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Project Management Certificate">
+          </div>
+          <div class="project-info">
+            <h3>Agile Project Management</h3>
+            <p>Certified Scrum Master with expertise in agile methodologies.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="contact-form">
+        <form>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 Realyn V. Babagay. All rights reserved.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+        
+        // Close mobile menu if open
+        if (navLinks.classList.contains('active')) {
+          navLinks.classList.remove('active');
+          hamburger.classList.remove('toggle');
+        }
+      });
+    });
+    
+    // Mobile menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      hamburger.classList.toggle('toggle');
+    });
+    
+    // Close menu when clicking outside on mobile
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768 && 
+          !e.target.closest('.nav-links') && 
+          !e.target.closest('.hamburger') &&
+          navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('toggle');
+      }
+    });
+  </script>
+</body>
+</html>
